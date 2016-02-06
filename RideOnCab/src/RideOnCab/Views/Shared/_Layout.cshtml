@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,13 +23,17 @@
 </head>
 <body>
     <div id="sidebar">
-        @if (User.Identity.IsAuthenticated)
-            {
-            <img src="~/img/user1.jpg" alt="headshot" class="headshot" />
-            <span id="username">@User.Identity.Name</span>
-        }
         <ul class="nav">
-            <li class="active"><a asp-controller="App" asp-action="Index">Home</a></li>
+            <li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <img src="~/images/user1.jpg" alt="headshot" class="headshot" />
+                    <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
+                        <a asp-controller="Manage" asp-action="Index" title="Manage">@User.GetUserName()!</a>
+                    </form>
+                }
+            </li>
+            <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
             @if (User.Identity.IsAuthenticated)
             {
                 <li><a asp-controller="Vehicles" asp-action="Index">Vehicles</a></li>

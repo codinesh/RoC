@@ -17,9 +17,8 @@ label {
   padding: 4px;
   margin: 0;
 }
+*/
 
-
-}*/
 input[type=text], input[type=password], textarea {
     width: 250px;
 }
@@ -84,7 +83,6 @@ input[type=text], input[type=password], textarea {
         -webkit-transition: margin-left ease .25s;
         transition: margin-left ease .25s;
     }
-
 
 #map {
     width: 100%;
