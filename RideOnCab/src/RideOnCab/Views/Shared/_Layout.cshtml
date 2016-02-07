@@ -24,22 +24,18 @@
 <body>
     <div id="sidebar">
         <ul class="nav">
-            <li>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <img src="~/images/user1.jpg" alt="headshot" class="headshot" />
-                    <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
-                        <a asp-controller="Manage" asp-action="Index" title="Manage">@User.GetUserName()!</a>
-                    </form>
-                }
-            </li>
             <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
             @if (User.Identity.IsAuthenticated)
             {
                 <li><a asp-controller="Vehicles" asp-action="Index">Vehicles</a></li>
-                <li><a asp-controller="Vehicles" asp-action="Logout">Logout</a></li>
+                <li><a asp-controller="Cabs" asp-action="Index">Cabs</a></li>
+                <li><a asp-controller="Rides" asp-action="Index">Rides</a></li>
             }
+            <li class="pull-down">
+                @await Html.PartialAsync("_LoginPartial")
+            </li>
         </ul>
+
     </div>
 
     <div id="wrapper">
@@ -53,16 +49,12 @@
                     </li>
                 </ul>
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">Welcome to <i>Ride on Cab!</i></a>
-                <ul class="nav navbar-nav navbar-right">
-                    @await Html.PartialAsync("_LoginPartial")
-                </ul>
             </div>
         </nav>
         <div id="main" class="container-fluid">
             <div>
                 @RenderBody()
             </div>
-
         </div>
         <div id="footer" class="container-fluid">
             <div class="navbar navbar-inverse navbar-fixed-bottom">
@@ -93,5 +85,4 @@
 
     @RenderSection("scripts", required: false)
 </body>
-
 </html>

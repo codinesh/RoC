@@ -1,4 +1,4 @@
-@model RideOnCab.Models.Vehicle
+@model RideOnCab.Models.Cab
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,26 +8,20 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Vehicle</h4>
+    <h4>Cab</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Manufacturer)
+            @Html.DisplayNameFor(model => model.IsAvailable)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Manufacturer)
+            @Html.DisplayFor(model => model.IsAvailable)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Model)
+            @Html.DisplayNameFor(model => model.RegistrationNumber)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Model)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NumberOfSeats)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NumberOfSeats)
+            @Html.DisplayFor(model => model.RegistrationNumber)
         </dd>
     </dl>
     

@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
+using RideOnCab.Models;
 
 namespace RideOnCab.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Cab> Cabs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -18,5 +20,7 @@ namespace RideOnCab.Models
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Ride> Ride { get; set; }
     }
 }

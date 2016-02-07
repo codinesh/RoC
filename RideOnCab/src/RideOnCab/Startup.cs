@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RideOnCab.Models;
 using RideOnCab.Services;
+using RideOnCab.Data;
 
 namespace RideOnCab
 {
@@ -51,12 +52,13 @@ namespace RideOnCab
             services.AddMvc();
 
             // Add application services.
+            services.AddScoped<InitialData>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, InitialData seeder)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -98,6 +100,8 @@ namespace RideOnCab
                     name: "default",
                     template: "{controller=Vehicles}/{action=Index}/{id?}");
             });
+
+            seeder.SeedData();
         }
 
         // Entry point for the application.

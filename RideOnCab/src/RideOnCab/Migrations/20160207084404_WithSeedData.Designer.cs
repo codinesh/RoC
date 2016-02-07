@@ -8,9 +8,10 @@ using RideOnCab.Models;
 namespace RideOnCab.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160207084404_WithSeedData")]
+    partial class WithSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
@@ -160,24 +161,6 @@ namespace RideOnCab.Migrations
                     b.HasKey("Id");
                 });
 
-            modelBuilder.Entity("RideOnCab.Models.Ride", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("CabId");
-
-                    b.Property<string>("Destination");
-
-                    b.Property<decimal>("Fare");
-
-                    b.Property<string>("Source");
-
-                    b.Property<decimal>("WaitingChargesPerMinute");
-
-                    b.HasKey("Id");
-                });
-
             modelBuilder.Entity("RideOnCab.Models.Vehicle", b =>
                 {
                     b.Property<int>("Id")
@@ -229,13 +212,6 @@ namespace RideOnCab.Migrations
                     b.HasOne("RideOnCab.Models.Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId");
-                });
-
-            modelBuilder.Entity("RideOnCab.Models.Ride", b =>
-                {
-                    b.HasOne("RideOnCab.Models.Vehicle")
-                        .WithMany()
-                        .HasForeignKey("CabId");
                 });
         }
     }

@@ -1,4 +1,4 @@
-@model IEnumerable<RideOnCab.Models.Vehicle>
+@model IEnumerable<RideOnCab.Models.Ride>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,13 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Manufacturer)
+            @Html.DisplayNameFor(model => model.Destination)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Model)
+            @Html.DisplayNameFor(model => model.Fare)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NumberOfSeats)
+            @Html.DisplayNameFor(model => model.Source)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WaitingChargesPerMinute)
         </th>
         <th></th>
     </tr>
@@ -26,13 +29,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Manufacturer)
+            @Html.DisplayFor(modelItem => item.Destination)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Model)
+            @Html.DisplayFor(modelItem => item.Fare)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.NumberOfSeats)
+            @Html.DisplayFor(modelItem => item.Source)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WaitingChargesPerMinute)
         </td>
         <td>
             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

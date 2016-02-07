@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace RideOnCab.Models
 {
-    public class Vehicle
+    public class Cab
     {
         public int Id { get; set; }
-        public string Model { get; set; }
-        public string Manufacturer { get; set; }
-        public int NumberOfSeats { get; set; }
+        public string RegistrationNumber { get; set; }
+        public bool IsAvailable { get; set; }
+
+        public Vehicle Vehicle { get; set; }
     }
+
 }
