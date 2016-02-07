@@ -12,7 +12,7 @@ namespace RideOnCab.Models
         public string Destination { get; set; }
         public decimal Fare { get; set; }
         public decimal WaitingChargesPerMinute { get; set; }
-        public Vehicle Cab { get; set; }
+        public Cab Cab { get; set; }
     }
 
 }
