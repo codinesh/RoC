@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using RideOnCab.Models;
 using RideOnCab.Services;
 using RideOnCab.Data;
+using RideOnCab.Controllers.Api;
 
 namespace RideOnCab
 {
@@ -53,6 +54,7 @@ namespace RideOnCab
 
             // Add application services.
             services.AddScoped<InitialData>();
+            services.AddSingleton<RideOnCabApiController>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }

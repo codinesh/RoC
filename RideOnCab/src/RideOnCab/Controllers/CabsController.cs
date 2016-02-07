@@ -4,9 +4,11 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using RideOnCab.Models;
+using Microsoft.AspNet.Authorization;
 
 namespace RideOnCab.Controllers
 {
+    [Authorize]
     public class CabsController : Controller
     {
         private ApplicationDbContext _context;
@@ -19,7 +21,8 @@ namespace RideOnCab.Controllers
         // GET: Cabs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cabs.ToListAsync());
+            var cabs = await _context.Cabs.ToListAsync();
+            return View(cabs);
         }
 
         // GET: Cabs/Details/5
