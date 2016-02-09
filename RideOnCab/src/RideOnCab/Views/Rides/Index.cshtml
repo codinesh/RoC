@@ -1,24 +1,27 @@
 @model IEnumerable<RideOnCab.Models.Ride>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Rides";
 }
 
-<h2>Index</h2>
+<h2>Rides</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add a Ride</a>
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Source)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Destination)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Fare)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Source)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.WaitingChargesPerMinute)
@@ -29,20 +32,23 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Vehicle.Manufacturer)
+            @Html.DisplayFor(modelItem => item.Vehicle.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Source)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Destination)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Fare)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Source)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.WaitingChargesPerMinute)
         </td>
         <td>
             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
             <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
         </td>
     </tr>

@@ -4,7 +4,10 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using RideOnCab.Models;
+using RideOnCab.ViewModels;
 using Microsoft.AspNet.Authorization;
+using RideOnCab.Utilities;
+using System.Collections.Generic;
 
 namespace RideOnCab.Controllers
 {
@@ -12,17 +15,18 @@ namespace RideOnCab.Controllers
     public class CabsController : Controller
     {
         private ApplicationDbContext _context;
+        private Repository _repo;
 
-        public CabsController(ApplicationDbContext context)
+        public CabsController(ApplicationDbContext context, Repository repo)
         {
-            _context = context;    
+            _context = context;
+            _repo = repo;
         }
 
         // GET: Cabs
         public async Task<IActionResult> Index()
         {
-            var cabs = await _context.Cabs.ToListAsync();
-            return View(cabs);
+            return View(await _context.Cabs.Include(v => v.Vehicle).ToListAsync());
         }
 
         // GET: Cabs/Details/5
@@ -45,17 +49,30 @@ namespace RideOnCab.Controllers
         // GET: Cabs/Create
         public IActionResult Create()
         {
-            return View();
+            CabViewModel cabsVM = new CabViewModel();
+            cabsVM.AvailableVehicles = _repo.GetVehicles() as List<Vehicle>;
+            foreach (var item in cabsVM.AvailableVehicles)
+            {
+                cabsVM.AvailableVehicles1.Add(
+                    new SelectListItem
+                    {
+                        Text = item.Manufacturer + " " + item.Model,
+                        Value = item.Id.ToString()
+                    }
+                );
+            }
+            return View(cabsVM);
         }
 
         // POST: Cabs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Cab cab)
+        public async Task<IActionResult> Create(CabViewModel cab)
         {
             if (ModelState.IsValid)
             {
-                _context.Cabs.Add(cab);
+                var cabObj = new Cab { RegistrationNumber = cab.RegistrationNumber, Vehicle = new Vehicle { Id = cab.SelectedVehicleId } };
+                _context.Cabs.Add(cabObj);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -70,22 +87,45 @@ namespace RideOnCab.Controllers
                 return HttpNotFound();
             }
 
-            Cab cab = await _context.Cabs.SingleAsync(m => m.Id == id);
+            Cab cab = await _context.Cabs.Include(v => v.Vehicle).SingleAsync(m => m.Id == id);
             if (cab == null)
             {
                 return HttpNotFound();
             }
-            return View(cab);
+            CabViewModel cabVM = new CabViewModel
+            {
+                AvailableVehicles = _repo.GetVehicles() as List<Vehicle>,
+                Id = cab.Id,
+                IsAvailable = cab.IsAvailable,
+                RegistrationNumber = cab.RegistrationNumber,
+                Vehicle = cab.Vehicle,
+                SelectedVehicleId = cab.Vehicle.Id
+            };
+
+            foreach (var item in cabVM.AvailableVehicles)
+            {
+                cabVM.AvailableVehicles1.Add(
+                    new SelectListItem
+                    {
+                        Text = item.Manufacturer + " " + item.Model,
+                        Value = item.Id.ToString(),
+                        Selected = item.Id == cab.Id ? true : false
+                    }
+                );
+            }
+
+            return View(cabVM);
         }
 
         // POST: Cabs/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Cab cab)
+        public async Task<IActionResult> Edit(CabViewModel cab)
         {
             if (ModelState.IsValid)
             {
-                _context.Update(cab);
+                var cabObj = new Cab { RegistrationNumber = cab.RegistrationNumber, Vehicle = new Vehicle { Id = cab.SelectedVehicleId } };
+                _context.Update(cabObj);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

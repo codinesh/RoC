@@ -23,13 +23,13 @@
 
     $("#sidebarToggle").on("click", function () {
         $sidebarAndWrapper.toggleClass("hide-sidebar");
-        if ($sidebarAndWrapper.hasClass("hide-sidebar")) {
-            $icon.removeClass("fa-angle-left");
-            $icon.addClass("fa-angle-right");
-        } else {
-            $icon.addClass("fa-angle-left");
-            $icon.removeClass("fa-angle-right");
-        }
+        //if ($sidebarAndWrapper.hasClass("hide-sidebar")) {
+        //    $icon.removeClass("fa-angle-left");
+        //    $icon.addClass("fa-angle-right");
+        //} else {
+        //    $icon.addClass("fa-angle-left");
+        //    $icon.removeClass("fa-angle-right");
+        //}
     });
 
     $('.pull-down').each(function () {

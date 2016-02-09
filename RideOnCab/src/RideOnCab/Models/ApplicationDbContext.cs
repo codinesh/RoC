@@ -12,6 +12,7 @@ namespace RideOnCab.Models
     {
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Cab> Cabs { get; set; }
+        public DbSet<Ride> Ride { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -20,7 +21,5 @@ namespace RideOnCab.Models
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-
-        public DbSet<Ride> Ride { get; set; }
     }
 }
