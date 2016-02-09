@@ -19,7 +19,7 @@ label {
 }
 */
 
-input[type=text], input[type=password], textarea {
+input[type=text], input[type=password], input[type=email], input[type=number], textarea, select {
     width: 250px;
 }
 

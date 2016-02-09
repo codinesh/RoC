@@ -1,17 +1,31 @@
-@model RideOnCab.Models.Ride
+@model RideOnCab.ViewModels.RideViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Ride";
 }
 
-<h2>Edit</h2>
+<h2>Edit Ride</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Ride</h4>
         <hr />
         <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="AvailableVehicles" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="AvailableVehicles" asp-items="@Model.AvailableVehicles1" class="form-control"></select>
+                <span asp-validation-for="AvailableVehicles" class="text-danger" />
+            </div>
+            <input type="hidden" asp-for="SelectedVehicleId" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Source" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Source" class="form-control" />
+                <span asp-validation-for="Source" class="text-danger" />
+            </div>
+        </div>
         <div class="form-group">
             <label asp-for="Destination" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -24,13 +38,6 @@
             <div class="col-md-10">
                 <input asp-for="Fare" class="form-control" />
                 <span asp-validation-for="Fare" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Source" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Source" class="form-control" />
-                <span asp-validation-for="Source" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
@@ -56,4 +63,5 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/rides.js"></script>
 }

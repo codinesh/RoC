@@ -8,9 +8,10 @@ using RideOnCab.Models;
 namespace RideOnCab.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160207140800_WithRide1")]
+    partial class WithRide1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
@@ -165,15 +166,13 @@ namespace RideOnCab.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Destination")
-                        .IsRequired();
+                    b.Property<int?>("CabId");
+
+                    b.Property<string>("Destination");
 
                     b.Property<decimal>("Fare");
 
-                    b.Property<string>("Source")
-                        .IsRequired();
-
-                    b.Property<int?>("VehicleId");
+                    b.Property<string>("Source");
 
                     b.Property<decimal>("WaitingChargesPerMinute");
 
@@ -185,11 +184,9 @@ namespace RideOnCab.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Manufacturer")
-                        .IsRequired();
+                    b.Property<string>("Manufacturer");
 
-                    b.Property<string>("Model")
-                        .IsRequired();
+                    b.Property<string>("Model");
 
                     b.Property<int>("NumberOfSeats");
 
@@ -237,9 +234,9 @@ namespace RideOnCab.Migrations
 
             modelBuilder.Entity("RideOnCab.Models.Ride", b =>
                 {
-                    b.HasOne("RideOnCab.Models.Vehicle")
+                    b.HasOne("RideOnCab.Models.Cab")
                         .WithMany()
-                        .HasForeignKey("VehicleId");
+                        .HasForeignKey("CabId");
                 });
         }
     }

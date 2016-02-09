@@ -4,9 +4,11 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using RideOnCab.Models;
+using Microsoft.AspNet.Authorization;
 
 namespace RideOnCab.Controllers
 {
+    [Authorize]
     public class VehiclesController : Controller
     {
         private ApplicationDbContext _context;

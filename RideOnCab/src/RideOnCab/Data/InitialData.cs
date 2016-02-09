@@ -19,7 +19,7 @@ namespace RideOnCab.Data
             List<Vehicle> vehicles = new List<Vehicle>();
             List<Cab> cabs = new List<Cab>();
 
-            if (!_context.Vehicles.Any())
+           if (!_context.Vehicles.Any())
             {
                 vehicles = new List<Vehicle> {
                     new Vehicle { Manufacturer = "Honda", Model = "Accord", NumberOfSeats = 4},
